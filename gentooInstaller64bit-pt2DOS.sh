@@ -20,7 +20,9 @@ emerge --verbose --update --deep --newuse @world
 emerge app-portage/gentoolkit
 emerge app-admin/sudo
 emerge app-misc/neofetch
-emerge net-misc/networkmanager && etc-update && emerge net-misc/networkmanager
+emerge --autounmask-write net-misc/networkmanager
+dispatch-conf
+emerge net-misc/networkmanager
 
 ln -sf ../usr/share/zoneinfo/America/Chicago /etc/localtime
 
@@ -36,9 +38,9 @@ emerge sys-kernel/gentoo-sources
 eselect kernel set 1
 ls -l /usr/src/linux
 
-emerge  --autounmask sys-kernel/genkernel
-etc-update
-emerge  --autounmask sys-kernel/genkernel
+emerge  --autounmask-write sys-kernel/genkernel
+dispatch-conf
+emerge sys-kernel/genkernel
 nano -w /etc/fstab
 genkernel all
 ls /boot/vmlinu* /boot/initramfs*
